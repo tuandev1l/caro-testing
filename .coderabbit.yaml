@@ -13,8 +13,10 @@ reviews:
     drafts: false # Don't review draft PRs
     base_branches:
       - master
+      - master
       - develop
       - staging
+      - feature/**
       - feature/**
 
   # Review scope
