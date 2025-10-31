@@ -1,0 +1,300 @@
+# CodeRabbit Configuration for Caro Game Project
+# This file configures automated code review and PR management
+
+# Language and tone settings
+language: en
+tone_instructions: "Be constructive, educational, and focus on best practices. Provide specific examples and explanations."
+
+# Review settings
+reviews:
+  # Enable automatic reviews on PR creation and updates
+  auto_review:
+    enabled: true
+    drafts: false # Don't review draft PRs
+    base_branches:
+      - main
+      - develop
+      - staging
+  
+  # Review scope
+  scope:
+    include:
+      - "**/*.ts"
+      - "**/*.tsx"
+      - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.json"
+      - "**/*.yaml"
+      - "**/*.yml"
+      - "**/*.md"
+    exclude:
+      - "node_modules/**"
+      - "dist/**"
+      - "build/**"
+      - ".next/**"
+      - "coverage/**"
+      - "*.lock"
+      - "bun.lockb"
+      - "package-lock.json"
+      - "yarn.lock"
+  
+  # Review depth and focus
+  profile: assertive # Options: chill, assertive
+  request_changes_workflow: true
+  high_level_summary: true
+  poem: false # No poems in reviews
+  review_status: true
+  collapse_walkthrough: false
+  
+  # Auto-approve settings
+  auto_approve:
+    enabled: false # Manual approval required for safety
+    conditions:
+      - "files_changed < 5"
+      - "additions < 100"
+      - "deletions < 100"
+
+# Path-specific instructions
+path_instructions:
+  - path: "client/**/*.tsx"
+    instructions: |
+      - Ensure React components follow functional component patterns with hooks
+      - Check for proper TypeScript typing (no 'any' types)
+      - Verify accessibility (a11y) attributes are present
+      - Ensure proper error boundaries are used
+      - Check for performance optimizations (useMemo, useCallback where appropriate)
+      - Verify SEO meta tags for page components
+      - Ensure responsive design patterns are followed
+  
+  - path: "client/**/*.ts"
+    instructions: |
+      - Verify proper TypeScript types and interfaces
+      - Check for proper error handling
+      - Ensure utilities are pure functions where possible
+      - Verify proper exports and imports
+  
+  - path: "server/**/*.ts"
+    instructions: |
+      - Ensure NestJS decorators are used correctly
+      - Verify proper dependency injection
+      - Check for input validation using class-validator
+      - Ensure proper error handling with HttpException
+      - Verify database queries are optimized
+      - Check for proper logging
+      - Ensure WebSocket events are properly typed
+      - Verify authentication and authorization guards are applied
+  
+  - path: "server/**/*.controller.ts"
+    instructions: |
+      - Verify all endpoints have proper HTTP method decorators
+      - Check for input validation DTOs
+      - Ensure proper response status codes
+      - Verify API documentation (Swagger) decorators
+      - Check for rate limiting decorators where needed
+  
+  - path: "server/**/*.service.ts"
+    instructions: |
+      - Ensure business logic is properly encapsulated
+      - Verify proper error handling and logging
+      - Check for transaction handling where needed
+      - Ensure methods are testable (avoid tight coupling)
+  
+  - path: "**/*.test.ts"
+    instructions: |
+      - Verify test coverage for happy paths and edge cases
+      - Check for proper test descriptions
+      - Ensure mocks are used appropriately
+      - Verify assertions are meaningful
+      - Check for test isolation (no shared state)
+  
+  - path: "**/*.spec.ts"
+    instructions: |
+      - Same as *.test.ts files
+      - Ensure E2E tests cover critical user flows
+  
+  - path: "shared/**/*.ts"
+    instructions: |
+      - Ensure types and interfaces are properly exported
+      - Verify no circular dependencies
+      - Check that shared code has no environment-specific dependencies
+      - Ensure proper documentation for shared utilities
+
+# Specific checks to perform
+checks:
+  # TypeScript specific
+  typescript:
+    - no_any_types
+    - proper_type_annotations
+    - no_type_assertions_without_reason
+    - prefer_interfaces_over_types_for_objects
+    - use_const_assertions_where_appropriate
+  
+  # Code quality
+  quality:
+    - no_console_log_in_production_code
+    - no_commented_out_code
+    - no_todo_without_ticket_reference
+    - proper_error_handling
+    - no_magic_numbers
+    - descriptive_variable_names
+    - function_complexity_under_15
+    - file_length_under_300_lines
+  
+  # Security
+  security:
+    - no_hardcoded_secrets
+    - no_eval_usage
+    - proper_input_validation
+    - no_sql_injection_vulnerabilities
+    - proper_authentication_checks
+    - no_sensitive_data_in_logs
+  
+  # Performance
+  performance:
+    - no_unnecessary_re_renders
+    - proper_memoization
+    - efficient_database_queries
+    - no_n_plus_1_queries
+    - proper_caching_strategy
+  
+  # Testing
+  testing:
+    - test_coverage_above_80_percent
+    - tests_for_new_features
+    - tests_for_bug_fixes
+    - no_skipped_tests_without_reason
+  
+  # Documentation
+  documentation:
+    - jsdoc_for_public_apis
+    - readme_updated_for_new_features
+    - api_documentation_updated
+    - complex_logic_explained
+
+# Review focus areas
+focus_areas:
+  - security_vulnerabilities
+  - performance_issues
+  - type_safety
+  - error_handling
+  - test_coverage
+  - code_duplication
+  - accessibility
+  - best_practices
+
+# Ignore patterns for specific checks
+ignore:
+  - path: "**/*.config.ts"
+    checks:
+      - no_magic_numbers
+  
+  - path: "**/*.config.js"
+    checks:
+      - no_magic_numbers
+  
+  - path: "**/migrations/**"
+    checks:
+      - file_length_under_300_lines
+
+# Custom rules specific to Caro game
+custom_rules:
+  - name: "Game Constants Usage"
+    description: "Ensure game constants are imported from GAME_CONFIG"
+    pattern: "\\b(16|5|30000|10000|1000)\\b"
+    message: "Use GAME_CONFIG constants instead of magic numbers for game configuration"
+    severity: warning
+    paths:
+      - "**/*game*.ts"
+      - "**/*board*.ts"
+  
+  - name: "WebSocket Event Typing"
+    description: "Ensure WebSocket events are properly typed"
+    pattern: "socket\\.(emit|on)\\(['\"]\\w+['\"]"
+    message: "Ensure WebSocket events use typed event names from shared constants"
+    severity: warning
+    paths:
+      - "server/**/*.gateway.ts"
+      - "client/**/hooks/use-socket*.ts"
+  
+  - name: "Server-side Validation"
+    description: "Ensure game logic validation happens on server"
+    pattern: "(checkWin|validateMove|isValidPosition)"
+    message: "Ensure this validation also exists on the server-side"
+    severity: error
+    paths:
+      - "client/**/*.ts"
+      - "client/**/*.tsx"
+  
+  - name: "Linear Task Reference"
+    description: "Ensure commits reference Linear tasks"
+    pattern: "^(feat|fix|refactor|docs|test|chore):"
+    message: "Commit message should reference Linear task ID (e.g., 'feat(CAR-123): add feature')"
+    severity: info
+    applies_to: commit_messages
+
+# Auto-fix settings
+auto_fix:
+  enabled: true
+  safe_only: true # Only apply safe auto-fixes
+  categories:
+    - formatting
+    - imports
+    - simple_refactoring
+
+# Integration settings
+integrations:
+  linear:
+    enabled: true
+    auto_link_issues: true
+    status_sync: true
+    status_mapping:
+      in_review: "In Review"
+      merged: "Done"
+      closed: "Cancelled"
+  
+  github:
+    enabled: true
+    auto_merge:
+      enabled: true
+      conditions:
+        - all_checks_passed
+        - approved_by_coderabbit
+        - no_unresolved_comments
+        - branch_up_to_date
+      method: squash # Options: merge, squash, rebase
+      delete_branch: true
+
+# Notification settings
+notifications:
+  slack:
+    enabled: false # Configure if needed
+  
+  email:
+    enabled: false
+  
+  github:
+    enabled: true
+    events:
+      - review_completed
+      - auto_merge_completed
+      - checks_failed
+
+# Learning and improvement
+learning:
+  enabled: true
+  feedback_collection: true
+  adapt_to_project_style: true
+
+# Rate limiting and performance
+performance:
+  max_files_per_review: 100
+  timeout_seconds: 300
+  parallel_reviews: true
+
+# Experimental features
+experimental:
+  ai_suggestions: true
+  refactoring_suggestions: true
+  architecture_review: true
+  dependency_analysis: true
+

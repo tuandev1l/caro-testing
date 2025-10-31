@@ -1,0 +1,119 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: caro-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-caro_game}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - caro-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: caro-redis
+    restart: unless-stopped
+    command: >
+      sh -c "if [ -n \"${REDIS_PASSWORD}\" ]; then
+        redis-server --requirepass ${REDIS_PASSWORD};
+      else
+        redis-server;
+      fi"
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: >
+        sh -c "if [ -n \"${REDIS_PASSWORD}\" ]; then
+          redis-cli -a ${REDIS_PASSWORD} ping;
+        else
+          redis-cli ping;
+        fi"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - caro-network
+
+  # NestJS Backend
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: caro-server
+    restart: unless-stopped
+    ports:
+      - '3001:3001'
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: ${POSTGRES_USER:-postgres}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      DATABASE_NAME: ${POSTGRES_DB:-caro_game}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      JWT_EXPIRATION: ${JWT_EXPIRATION:-7d}
+      CLIENT_URL: ${CLIENT_URL:-http://localhost:3000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    networks:
+      - caro-network
+    command: bun run start:dev
+
+  # Next.js Frontend
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: caro-client
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    environment:
+      NEXT_PUBLIC_API_URL: ${SERVER_URL:-http://localhost:3001}
+      NEXT_PUBLIC_SOCKET_URL: ${SERVER_URL:-http://localhost:3001}
+      NEXT_PUBLIC_APP_URL: ${CLIENT_URL:-http://localhost:3000}
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - caro-network
+    command: bun run dev
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  caro-network:
+    driver: bridge
