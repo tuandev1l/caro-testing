@@ -16,7 +16,6 @@ reviews:
       - main
       - develop
       - staging
-      - feature/**
 
   # Review scope
   scope:
