@@ -2,6 +2,8 @@
 
 A full-stack, real-time multiplayer Caro (Gomoku) game with Elo ranking system, built with modern web technologies.
 
+> **Status**: Foundation setup complete ✅ | Sprint 1: 67% complete (4/6 tasks)
+
 ## 🌟 Features
 
 ### 🟢 Basic Level
