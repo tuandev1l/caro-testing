@@ -16,4 +16,3 @@ export default registerAs(
     autoLoadEntities: true,
   }),
 );
-

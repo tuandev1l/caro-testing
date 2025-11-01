@@ -7,4 +7,3 @@ import { RedisService } from './services/redis.service';
   exports: [RedisService],
 })
 export class CommonModule {}
-
