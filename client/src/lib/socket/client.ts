@@ -18,7 +18,7 @@ class SocketClient {
     }
 
     const token = this.getToken();
-    
+
     this.socket = io(env.socketUrl, {
       auth: {
         token,
@@ -83,7 +83,7 @@ class SocketClient {
   }
 
   // Event emitters
-  emit(event: string, data?: any): void {
+  emit(event: string, data?: unknown): void {
     if (!this.socket?.connected) {
       console.warn('Socket not connected. Cannot emit event:', event);
       return;
@@ -92,18 +92,17 @@ class SocketClient {
   }
 
   // Event listeners
-  on(event: string, callback: (...args: any[]) => void): void {
+  on(event: string, callback: (...args: unknown[]) => void): void {
     this.socket?.on(event, callback);
   }
 
-  off(event: string, callback?: (...args: any[]) => void): void {
+  off(event: string, callback?: (...args: unknown[]) => void): void {
     this.socket?.off(event, callback);
   }
 
-  once(event: string, callback: (...args: any[]) => void): void {
+  once(event: string, callback: (...args: unknown[]) => void): void {
     this.socket?.once(event, callback);
   }
 }
 
 export const socketClient = new SocketClient();
-
