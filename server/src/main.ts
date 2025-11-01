@@ -9,7 +9,7 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors({
-    origin: configService.get('CLIENT_URL') || 'http://localhost:3000',
+    origin: configService.get<string>('CLIENT_URL') || 'http://localhost:3000',
     credentials: true,
   });
 
@@ -25,10 +25,11 @@ async function bootstrap() {
   // Global prefix
   app.setGlobalPrefix('api');
 
-  const port = configService.get('PORT') || 3001;
+  const port = configService.get<number>('PORT') || 3001;
   await app.listen(port);
 
   console.log(`🚀 Server is running on: http://localhost:${port}`);
   console.log(`📚 API Documentation: http://localhost:${port}/api`);
 }
-bootstrap();
+
+void bootstrap();

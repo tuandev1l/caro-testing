@@ -8,8 +8,17 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
 
   constructor(private configService: ConfigService) {}
 
-  async onModuleInit() {
-    const redisConfig = this.configService.get('redis');
+  onModuleInit() {
+    const redisConfig = this.configService.get<{
+      host: string;
+      port: number;
+      password?: string;
+    }>('redis');
+
+    if (!redisConfig) {
+      throw new Error('Redis configuration not found');
+    }
+
     this.client = new Redis({
       host: redisConfig.host,
       port: redisConfig.port,
@@ -82,4 +91,3 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     return this.client.ttl(key);
   }
 }
-

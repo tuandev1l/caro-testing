@@ -7,6 +7,8 @@ import databaseConfig from './config/database.config';
 import redisConfig from './config/redis.config';
 import jwtConfig from './config/jwt.config';
 import { CommonModule } from './common/common.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -18,7 +20,18 @@ import { CommonModule } from './common/common.module';
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const dbConfig = configService.get('database');
+        const dbConfig = configService.get<{
+          type: 'postgres';
+          host: string;
+          port: number;
+          username: string;
+          password: string;
+          database: string;
+          entities: string[];
+          synchronize: boolean;
+          logging: boolean;
+          autoLoadEntities: boolean;
+        }>('database');
         if (!dbConfig) {
           throw new Error('Database configuration not found');
         }
@@ -26,6 +39,8 @@ import { CommonModule } from './common/common.module';
       },
     }),
     CommonModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
