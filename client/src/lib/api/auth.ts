@@ -14,7 +14,7 @@ export interface RegisterDto {
 }
 
 export interface LoginDto {
-  usernameOrEmail: string;
+  username: string;
   password: string;
 }
 
@@ -63,6 +63,9 @@ class AuthService {
     if (typeof window === 'undefined') return;
     localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.USER_DATA);
+    // Remove cookie
+    document.cookie =
+      'caro_auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT';
   }
 
   /**
@@ -95,12 +98,19 @@ class AuthService {
   }
 
   /**
-   * Save authentication data to localStorage
+   * Save authentication data to localStorage and cookies
    */
   private saveAuthData(data: AuthResponse): void {
     if (typeof window === 'undefined') return;
     localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, data.accessToken);
     localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(data.user));
+
+    // Save token in cookie for middleware (7 days expiry)
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + 7);
+    document.cookie = `caro_auth_token=${
+      data.accessToken
+    }; path=/; expires=${expiryDate.toUTCString()}; SameSite=Lax`;
   }
 }
 

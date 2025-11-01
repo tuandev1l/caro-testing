@@ -3,6 +3,7 @@ import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import type { StringValue } from 'ms';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
@@ -17,7 +18,8 @@ import { User } from '../../entities/user.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => {
         const secret = configService.get<string>('jwt.secret');
-        const expiresIn = configService.get('jwt.expiresIn') || '7d';
+        const expiresIn: StringValue | number =
+          (configService.get<string>('jwt.expiresIn') as StringValue) || '7d';
 
         if (!secret) {
           throw new Error('JWT secret is not configured');

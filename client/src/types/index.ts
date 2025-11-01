@@ -78,3 +78,27 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
+// Auth DTOs
+export interface RegisterDto {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginDto {
+  username: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  user: {
+    id: string;
+    username: string;
+    email: string;
+    elo: number;
+    wins: number;
+    losses: number;
+    draws: number;
+  };
+}
