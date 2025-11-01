@@ -3,9 +3,11 @@
 ## Epic: Online Caro (Gomoku) Game System
 
 ### Epic Description
+
 Build a full-featured online Caro (Gomoku) game system with real-time multiplayer, ranking system, and advanced features including reconnection handling and game state persistence.
 
 ### Epic Goals
+
 - Deliver a high-performance, SEO-optimized web application
 - Implement real-time multiplayer gameplay with WebSocket
 - Create a fair ranking system with Elo ratings
@@ -18,10 +20,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ## Sprint Structure (8 Sprints × 2 weeks = 16 weeks)
 
 ### Sprint 1: Foundation & Infrastructure (Week 1-2)
+
 **Goal**: Set up project infrastructure, development environment, and basic architecture
 
 #### Stories
+
 1. **As a developer, I want a properly configured development environment**
+
    - Tasks:
      - Initialize Next.js client with TypeScript and Tailwind CSS
      - Initialize NestJS server with TypeScript
@@ -35,14 +40,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Create Docker Compose for local development
 
 2. **As a developer, I want automated CI/CD pipelines**
+
    - Tasks:
      - Create GitHub Actions workflow for client build and test
      - Create GitHub Actions workflow for server build and test
-     - Set up CodeRabbitAI integration
      - Configure Linear integration with GitHub
    - Issues:
-     - Set up automated PR creation from Linear tasks
-     - Configure auto-merge rules
+     - Set up automated testing on PR creation
 
 3. **As a developer, I want comprehensive documentation**
    - Tasks:
@@ -55,10 +59,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 2: Authentication & User Management (Week 3-4)
+
 **Goal**: Implement user authentication and basic user management
 
 #### Stories
+
 1. **As a user, I want to register an account**
+
    - Tasks:
      - Create User entity with TypeORM
      - Implement registration endpoint
@@ -70,6 +77,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Add email validation
 
 2. **As a user, I want to log in to my account**
+
    - Tasks:
      - Implement JWT authentication
      - Create login endpoint
@@ -91,10 +99,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 3: Game Board & Basic Gameplay (Week 5-6)
+
 **Goal**: Implement the game board UI and basic game mechanics
 
 #### Stories
+
 1. **As a player, I want to see a 16x16 game board**
+
    - Tasks:
      - Create GameBoard component
      - Implement responsive grid layout
@@ -105,6 +116,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Optimize rendering performance
 
 2. **As a player, I want to place pieces on the board**
+
    - Tasks:
      - Implement client-side move validation
      - Add visual feedback for valid/invalid moves
@@ -127,10 +139,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 4: Real-time Multiplayer & Room System (Week 7-8)
+
 **Goal**: Implement WebSocket communication and room management
 
 #### Stories
+
 1. **As a player, I want to create and join game rooms**
+
    - Tasks:
      - Create Room entity
      - Implement create room endpoint
@@ -142,6 +157,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Prevent joining full rooms
 
 2. **As a player, I want real-time game updates**
+
    - Tasks:
      - Set up Socket.io server
      - Set up Socket.io client
@@ -164,10 +180,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 5: Challenge System & Game Flow (Week 9-10)
+
 **Goal**: Implement the challenge mechanism and complete game flow
 
 #### Stories
+
 1. **As a player, I want to challenge my opponent**
+
    - Tasks:
      - Implement challenge WebSocket event
      - Create challenge UI with buttons
@@ -178,6 +197,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Auto-start game if one player doesn't challenge
 
 2. **As a player, I want a turn timer**
+
    - Tasks:
      - Implement 30-second turn timer
      - Display timer countdown in UI
@@ -200,10 +220,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 6: Win Condition & Game Logic (Week 11-12)
+
 **Goal**: Implement robust win condition checking and game logic
 
 #### Stories
+
 1. **As a player, I want the game to detect wins correctly**
+
    - Tasks:
      - Implement horizontal win check
      - Implement vertical win check
@@ -215,6 +238,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Handle edge cases (board boundaries)
 
 2. **As a player, I want two-end block detection (Intermediate Level)**
+
    - Tasks:
      - Implement two-end block pattern detection
      - Add tests for blocked patterns
@@ -236,10 +260,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 7: Elo System & Rankings (Week 13-14)
+
 **Goal**: Implement Elo rating system and player rankings
 
 #### Stories
+
 1. **As a player, I want my Elo rating to be calculated**
+
    - Tasks:
      - Implement Elo calculation algorithm
      - Update player Elo on game completion
@@ -250,6 +277,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Prevent Elo manipulation
 
 2. **As a player, I want to see rankings**
+
    - Tasks:
      - Create rankings page UI
      - Implement get rankings endpoint
@@ -273,10 +301,13 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ---
 
 ### Sprint 8: Reconnection & State Persistence (Week 15-16)
+
 **Goal**: Implement advanced reconnection handling and game state persistence
 
 #### Stories
+
 1. **As a player, I want to reconnect to my game after disconnection**
+
    - Tasks:
      - Store game state in Redis on each move
      - Implement reconnection detection
@@ -287,6 +318,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
      - Sync state between reconnected clients
 
 2. **As a player, I want the game to handle network issues gracefully**
+
    - Tasks:
      - Implement connection status indicator
      - Add reconnection attempts with backoff
@@ -311,6 +343,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ## Additional Sprints (Optional Enhancements)
 
 ### Sprint 9: UI/UX Polish & Animations
+
 - Smooth animations for piece placement
 - Victory celebration animations
 - Sound effects for moves and wins
@@ -318,6 +351,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 - Responsive design improvements
 
 ### Sprint 10: Performance Optimization
+
 - Code splitting and lazy loading
 - Image optimization
 - Database query optimization
@@ -325,6 +359,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 - Lighthouse score optimization
 
 ### Sprint 11: Testing & Quality Assurance
+
 - Increase test coverage to 90%+
 - E2E tests for critical flows
 - Load testing for WebSocket
@@ -332,6 +367,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 - Accessibility audit
 
 ### Sprint 12: Deployment & Monitoring
+
 - Set up production environment
 - Configure CI/CD for deployment
 - Implement monitoring and alerting
@@ -343,6 +379,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ## Success Metrics
 
 ### Technical Metrics
+
 - [ ] Test coverage > 80%
 - [ ] Lighthouse score > 90
 - [ ] API response time < 200ms (p95)
@@ -350,6 +387,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 - [ ] Zero critical security vulnerabilities
 
 ### Product Metrics
+
 - [ ] User registration flow completion rate > 80%
 - [ ] Game completion rate > 70%
 - [ ] Average game duration: 5-15 minutes
@@ -357,6 +395,7 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 - [ ] User satisfaction score > 4/5
 
 ### Business Metrics
+
 - [ ] 100+ active users in first month
 - [ ] 1000+ games played in first month
 - [ ] Average session duration > 20 minutes
@@ -367,12 +406,14 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ## Risk Management
 
 ### Technical Risks
+
 1. **WebSocket scalability**: Mitigate with Redis pub/sub for horizontal scaling
 2. **Database performance**: Implement proper indexing and caching
 3. **State synchronization**: Use Redis as single source of truth
 4. **Security vulnerabilities**: Regular security audits and dependency updates
 
 ### Product Risks
+
 1. **User adoption**: Focus on smooth onboarding and tutorial
 2. **Cheating**: Implement server-side validation for all moves
 3. **Abuse**: Add rate limiting and reporting system
@@ -383,13 +424,14 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 ## Dependencies
 
 ### External Services
+
 - PostgreSQL database
 - Redis cache
 - GitHub (version control)
 - Linear (project management)
-- CodeRabbitAI (code review)
 
 ### Third-party Libraries
+
 - Next.js, React
 - NestJS, TypeORM
 - Socket.io
@@ -401,16 +443,15 @@ Build a full-featured online Caro (Gomoku) game system with real-time multiplaye
 
 ## Timeline Summary
 
-| Sprint | Duration | Focus Area |
-|--------|----------|------------|
-| 1 | Week 1-2 | Foundation & Infrastructure |
-| 2 | Week 3-4 | Authentication & User Management |
-| 3 | Week 5-6 | Game Board & Basic Gameplay |
-| 4 | Week 7-8 | Real-time Multiplayer & Room System |
-| 5 | Week 9-10 | Challenge System & Game Flow |
-| 6 | Week 11-12 | Win Condition & Game Logic |
-| 7 | Week 13-14 | Elo System & Rankings |
-| 8 | Week 15-16 | Reconnection & State Persistence |
+| Sprint | Duration   | Focus Area                          |
+| ------ | ---------- | ----------------------------------- |
+| 1      | Week 1-2   | Foundation & Infrastructure         |
+| 2      | Week 3-4   | Authentication & User Management    |
+| 3      | Week 5-6   | Game Board & Basic Gameplay         |
+| 4      | Week 7-8   | Real-time Multiplayer & Room System |
+| 5      | Week 9-10  | Challenge System & Game Flow        |
+| 6      | Week 11-12 | Win Condition & Game Logic          |
+| 7      | Week 13-14 | Elo System & Rankings               |
+| 8      | Week 15-16 | Reconnection & State Persistence    |
 
 **Total Duration**: 16 weeks (4 months)
-

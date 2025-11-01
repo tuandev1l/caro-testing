@@ -5,19 +5,13 @@
 ### 1. Configuration Files
 
 #### Augment Rules
-- ✅ **Root Rules** (`.augment/rules`): General project rules, architecture, and workflow
-- ✅ **Client Rules** (`client/.augment/rules`): Next.js specific development guidelines
-- ✅ **Server Rules** (`server/.augment/rules`): NestJS specific development guidelines
 
-#### CodeRabbit Configuration
-- ✅ **`.coderabbit.yaml`**: Automated code review configuration
-  - Review settings and scope
-  - Path-specific instructions
-  - Custom rules for game logic
-  - Auto-merge configuration
-  - Linear integration settings
+- ✅ **Root Rules** (`.augment/rules.md`): General project rules, architecture, and workflow
+- ✅ **Client Rules** (`client/.augment/rules.md`): Next.js specific development guidelines
+- ✅ **Server Rules** (`server/.augment/rules.md`): NestJS specific development guidelines
 
 #### CI/CD
+
 - ✅ **`.github/workflows/ci.yml`**: GitHub Actions workflow
   - Client CI (lint, test, build)
   - Server CI (lint, test, build)
@@ -26,6 +20,7 @@
   - Coverage reporting
 
 #### Docker
+
 - ✅ **`docker-compose.yml`**: Complete development environment
   - PostgreSQL database
   - Redis cache
@@ -37,6 +32,7 @@
 ### 2. Shared Code
 
 #### Types
+
 - ✅ **`shared/types/game.types.ts`**: Comprehensive TypeScript types
   - Game constants (GAME_CONFIG)
   - Game state types
@@ -50,6 +46,7 @@
 ### 3. Documentation
 
 #### Core Documentation
+
 - ✅ **`README.md`**: Project overview and quick start guide
 - ✅ **`docs/project-plan.md`**: Detailed 8-sprint project plan
 - ✅ **`docs/linear-tasks-summary.md`**: Linear tasks and workflow
@@ -58,6 +55,7 @@
 ### 4. Linear Project Management
 
 #### Project Created
+
 - ✅ **Project**: "Online Caro Game System"
 - ✅ **Project ID**: `3874c2c0-8571-4c35-b0d9-7057622c18d8`
 - ✅ **URL**: https://linear.app/tuantm/project/online-caro-game-system-9b939746b664
@@ -65,6 +63,7 @@
 #### Issues Created (30 Total)
 
 **Sprint 1: Foundation & Infrastructure** (6 issues)
+
 - ISS-5: Development Environment Setup
 - ISS-6: Initialize Next.js Client
 - ISS-7: Initialize NestJS Server
@@ -73,39 +72,46 @@
 - ISS-10: CI/CD Pipeline Setup
 
 **Sprint 2: Authentication & User Management** (4 issues)
+
 - ISS-11: User Registration System
 - ISS-12: JWT Authentication
 - ISS-13: User Profile Page
 - ISS-14: Auth Guards and Middleware
 
 **Sprint 3: Game Board & Basic Gameplay** (4 issues)
+
 - ISS-15: Game Board Component
 - ISS-16: Piece Placement Logic
 - ISS-17: Game State Management
 - ISS-18: Game Persistence
 
 **Sprint 4: Real-time Multiplayer & Room System** (4 issues)
+
 - ISS-19: WebSocket Setup
 - ISS-20: Room Management System
 - ISS-21: Real-time Game Updates
 - ISS-22: Active Players List
 
 **Sprint 5: Challenge System & Game Flow** (3 issues)
+
 - ISS-23: Challenge System
 - ISS-24: Turn Timer System
 - ISS-25: Game Results UI
 
 **Sprint 6: Win Condition & Game Logic** (3 issues)
+
 - ISS-26: Win Condition Detection
 - ISS-27: Two-End Block Detection
 - ISS-28: Draw and Surrender Features
 
 **Sprint 7: Elo System & Rankings** (3 issues)
+
 - ISS-29: Elo Rating System
 - ISS-30: Player Rankings Page
 - ISS-31: Player Statistics Dashboard
 
 **Sprint 8: Reconnection & State Persistence** (3 issues)
+
 - ISS-32: Reconnection Handling
 - ISS-33: Network Resilience
 - ISS-34: Comprehensive Error Handling
@@ -115,7 +121,9 @@
 ## 🎯 Game Levels Implementation Plan
 
 ### 🟢 Basic Level (Sprints 1-5)
+
 Covers fundamental gameplay:
+
 - 16x16 board with 5-in-a-row win condition
 - Real-time 1v1 multiplayer
 - Room system (max 2 players)
@@ -124,7 +132,9 @@ Covers fundamental gameplay:
 - Win detection and notifications
 
 ### 🟡 Intermediate Level (Sprints 6-7)
+
 Adds advanced features:
+
 - Two-end block detection
 - Draw proposal and acceptance
 - Surrender functionality
@@ -133,7 +143,9 @@ Adds advanced features:
 - Win rate calculation
 
 ### 🔴 Advanced Level (Sprint 8)
+
 Implements resilience:
+
 - Network disconnection handling
 - Game state persistence in Redis
 - Reconnection and state restoration
@@ -147,6 +159,7 @@ Implements resilience:
 ### Immediate Actions (Sprint 1)
 
 1. **Initialize Client Project**
+
    ```bash
    cd client
    bunx create-next-app@latest . --typescript --tailwind --app --src-dir
@@ -154,6 +167,7 @@ Implements resilience:
    ```
 
 2. **Initialize Server Project**
+
    ```bash
    cd server
    bunx @nestjs/cli new . --package-manager bun
@@ -164,6 +178,7 @@ Implements resilience:
    ```
 
 3. **Setup Database**
+
    ```bash
    createdb caro_game
    cd server
@@ -172,10 +187,11 @@ Implements resilience:
    ```
 
 4. **Start Development**
+
    ```bash
    # Terminal 1
    cd server && bun run dev
-   
+
    # Terminal 2
    cd client && bun run dev
    ```
@@ -183,20 +199,24 @@ Implements resilience:
 ### Development Workflow
 
 1. **Pick Task from Linear**
+
    - Go to: https://linear.app/tuantm/project/online-caro-game-system-9b939746b664
    - Start with ISS-6 (Initialize Next.js Client)
 
 2. **Create Branch**
+
    ```bash
    git checkout -b feature/ISS-6-initialize-nextjs
    ```
 
 3. **Develop & Test**
+
    - Follow `.augment/rules` guidelines
    - Write tests (min 80% coverage)
    - Run linting and type checking
 
 4. **Commit & Push**
+
    ```bash
    git commit -m "feat(ISS-6): initialize Next.js with TypeScript and Tailwind"
    git push origin feature/ISS-6-initialize-nextjs
@@ -204,15 +224,16 @@ Implements resilience:
 
 5. **Create PR**
    - Title: `[ISS-6] Initialize Next.js Client`
-   - CodeRabbitAI will review automatically
+   - Wait for manual review
    - Address all comments
-   - Auto-merge when approved
+   - Manual merge after approval
 
 ---
 
 ## 📋 Project Standards
 
 ### Code Quality
+
 - ✅ TypeScript strict mode
 - ✅ No `any` types
 - ✅ ESLint + Prettier
@@ -220,12 +241,14 @@ Implements resilience:
 - ✅ Conventional commits
 
 ### Performance
+
 - ✅ Lighthouse score > 90
 - ✅ API response < 200ms (p95)
 - ✅ WebSocket latency < 50ms
 - ✅ Code splitting and lazy loading
 
 ### Security
+
 - ✅ JWT authentication
 - ✅ Input validation (client + server)
 - ✅ XSS protection
@@ -234,6 +257,7 @@ Implements resilience:
 - ✅ No hardcoded secrets
 
 ### Accessibility
+
 - ✅ WCAG 2.1 Level AA
 - ✅ Keyboard navigation
 - ✅ Screen reader support
@@ -245,11 +269,13 @@ Implements resilience:
 ## 🔗 Important Links
 
 ### Project Resources
+
 - **GitHub**: https://github.com/tuandev1l/caro-testing
 - **Linear Project**: https://linear.app/tuantm/project/online-caro-game-system-9b939746b664
 - **Documentation**: `/docs` folder
 
 ### Documentation Files
+
 - **Project Plan**: `docs/project-plan.md`
 - **Linear Tasks**: `docs/linear-tasks-summary.md`
 - **Getting Started**: `docs/getting-started.md`
@@ -258,6 +284,7 @@ Implements resilience:
 - **Server Rules**: `server/.augment/rules`
 
 ### Development URLs (when running)
+
 - **Frontend**: http://localhost:3000
 - **Backend**: http://localhost:3001
 - **API Docs**: http://localhost:3001/api/docs
@@ -268,16 +295,16 @@ Implements resilience:
 
 ## 📊 Project Timeline
 
-| Sprint | Duration | Focus | Issues |
-|--------|----------|-------|--------|
-| Sprint 1 | Week 1-2 | Foundation & Infrastructure | ISS-5 to ISS-10 |
-| Sprint 2 | Week 3-4 | Authentication & User Management | ISS-11 to ISS-14 |
-| Sprint 3 | Week 5-6 | Game Board & Basic Gameplay | ISS-15 to ISS-18 |
-| Sprint 4 | Week 7-8 | Real-time Multiplayer & Room System | ISS-19 to ISS-22 |
-| Sprint 5 | Week 9-10 | Challenge System & Game Flow | ISS-23 to ISS-25 |
-| Sprint 6 | Week 11-12 | Win Condition & Game Logic | ISS-26 to ISS-28 |
-| Sprint 7 | Week 13-14 | Elo System & Rankings | ISS-29 to ISS-31 |
-| Sprint 8 | Week 15-16 | Reconnection & State Persistence | ISS-32 to ISS-34 |
+| Sprint   | Duration   | Focus                               | Issues           |
+| -------- | ---------- | ----------------------------------- | ---------------- |
+| Sprint 1 | Week 1-2   | Foundation & Infrastructure         | ISS-5 to ISS-10  |
+| Sprint 2 | Week 3-4   | Authentication & User Management    | ISS-11 to ISS-14 |
+| Sprint 3 | Week 5-6   | Game Board & Basic Gameplay         | ISS-15 to ISS-18 |
+| Sprint 4 | Week 7-8   | Real-time Multiplayer & Room System | ISS-19 to ISS-22 |
+| Sprint 5 | Week 9-10  | Challenge System & Game Flow        | ISS-23 to ISS-25 |
+| Sprint 6 | Week 11-12 | Win Condition & Game Logic          | ISS-26 to ISS-28 |
+| Sprint 7 | Week 13-14 | Elo System & Rankings               | ISS-29 to ISS-31 |
+| Sprint 8 | Week 15-16 | Reconnection & State Persistence    | ISS-32 to ISS-34 |
 
 **Total Duration**: 16 weeks (4 months)
 
@@ -286,6 +313,7 @@ Implements resilience:
 ## ✨ Key Features Summary
 
 ### Technical Features
+
 - ✅ Next.js 14+ with App Router
 - ✅ NestJS with TypeORM
 - ✅ PostgreSQL + Redis
@@ -293,10 +321,10 @@ Implements resilience:
 - ✅ JWT authentication
 - ✅ Docker Compose setup
 - ✅ GitHub Actions CI/CD
-- ✅ CodeRabbitAI integration
 - ✅ Linear project management
 
 ### Game Features
+
 - ✅ 16x16 Gomoku board
 - ✅ Real-time multiplayer
 - ✅ Room system
@@ -314,6 +342,7 @@ Implements resilience:
 ## 🎓 Learning Resources
 
 ### Framework Documentation
+
 - [Next.js Docs](https://nextjs.org/docs)
 - [NestJS Docs](https://docs.nestjs.com)
 - [TypeORM Docs](https://typeorm.io)
@@ -321,9 +350,9 @@ Implements resilience:
 - [Tailwind CSS Docs](https://tailwindcss.com/docs)
 
 ### Tools Documentation
+
 - [Bun Docs](https://bun.sh/docs)
 - [Linear Docs](https://linear.app/docs)
-- [CodeRabbit Docs](https://docs.coderabbit.ai)
 - [GitHub Actions Docs](https://docs.github.com/en/actions)
 
 ---
@@ -333,9 +362,9 @@ Implements resilience:
 Your Caro Game project is now fully configured and ready for development!
 
 ### What You Have:
+
 ✅ Complete project structure
 ✅ Augment rules for AI-assisted development
-✅ CodeRabbit configuration for automated reviews
 ✅ CI/CD pipeline with GitHub Actions
 ✅ Docker Compose for easy development
 ✅ Shared TypeScript types
@@ -344,6 +373,7 @@ Your Caro Game project is now fully configured and ready for development!
 ✅ Clear development workflow
 
 ### What's Next:
+
 1. Read `docs/getting-started.md`
 2. Set up your development environment
 3. Start with Sprint 1, Issue ISS-6
@@ -354,6 +384,5 @@ Your Caro Game project is now fully configured and ready for development!
 
 **Happy Coding! 🚀**
 
-*Last Updated: 2025-10-31*
-*Project Setup by: Augment AI*
-
+_Last Updated: 2025-10-31_
+_Project Setup by: Augment AI_
