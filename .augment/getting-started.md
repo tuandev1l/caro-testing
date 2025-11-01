@@ -119,6 +119,7 @@ docker run -d -p 6379:6379 redis:7-alpine
 #### Step 5: Configure Environment Variables
 
 **Client (.env.local)**:
+
 ```bash
 cd client
 cat > .env.local << EOF
@@ -129,6 +130,7 @@ EOF
 ```
 
 **Server (.env)**:
+
 ```bash
 cd server
 cat > .env << EOF
@@ -168,12 +170,14 @@ bun run migration:run
 Open two terminal windows:
 
 **Terminal 1 - Backend**:
+
 ```bash
 cd server
 bun run dev
 ```
 
 **Terminal 2 - Frontend**:
+
 ```bash
 cd client
 bun run dev
@@ -218,12 +222,8 @@ test-augment-coderabbit/
 ├── shared/                     # Shared types and utilities
 │   └── types/
 │       └── game.types.ts
-├── docs/                       # Documentation
-│   ├── project-plan.md
-│   ├── linear-tasks-summary.md
-│   └── getting-started.md
 ├── docker-compose.yml          # Docker Compose configuration
-├── .coderabbit.yaml           # CodeRabbit configuration
+├── .env.example               # Environment variables template
 └── README.md
 ```
 
@@ -297,12 +297,12 @@ git push origin feature/ISS-6-initialize-nextjs
 # Create PR on GitHub
 # - Title: [ISS-6] Initialize Next.js with TypeScript and Tailwind
 # - Description: Include Linear task link
-# - CodeRabbitAI will review automatically
+# - Wait for manual review
 ```
 
 ### 7. Address Review Comments
 
-- CodeRabbitAI will review your PR automatically
+- Wait for manual code review
 - Address all comments and suggestions
 - Push additional commits to the same branch
 - All checks must pass before merge
@@ -367,6 +367,7 @@ bun run test:e2e
 ### Common Issues
 
 **Issue**: Port already in use
+
 ```bash
 # Find and kill process using port 3000 or 3001
 lsof -ti:3000 | xargs kill -9
@@ -374,6 +375,7 @@ lsof -ti:3001 | xargs kill -9
 ```
 
 **Issue**: Database connection error
+
 ```bash
 # Check if PostgreSQL is running
 pg_isready
@@ -383,6 +385,7 @@ sudo service postgresql restart
 ```
 
 **Issue**: Redis connection error
+
 ```bash
 # Check if Redis is running
 redis-cli ping
@@ -399,7 +402,6 @@ redis-server
 - [Socket.io Documentation](https://socket.io/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Linear Documentation](https://linear.app/docs)
-- [CodeRabbit Documentation](https://docs.coderabbit.ai)
 
 ## 🆘 Getting Help
 
@@ -421,4 +423,3 @@ Now that you're set up, you can:
 4. ✅ Start coding!
 
 Happy coding! 🚀
-

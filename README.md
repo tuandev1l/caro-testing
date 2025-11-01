@@ -78,7 +78,6 @@ A full-stack, real-time multiplayer Caro (Gomoku) game with Elo ranking system, 
 - **Package Manager**: Bun
 - **Version Control**: Git + GitHub
 - **CI/CD**: GitHub Actions
-- **Code Review**: CodeRabbitAI
 - **Project Management**: Linear
 - **Containerization**: Docker + Docker Compose
 
@@ -251,12 +250,12 @@ git push origin feature/ISS-XX-short-description
 ```
 
 - Create PR on GitHub
-- CodeRabbitAI will review automatically
-- Address all comments
+- Wait for manual review and approval
 
 ### 6. Merge
 
 - All checks must pass
+- Manual approval required
 - Auto-merge when approved
 - Linear task auto-updates to "Done"
 
